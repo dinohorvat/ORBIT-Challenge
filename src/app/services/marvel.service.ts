@@ -4,14 +4,12 @@ import {environment} from '../../environments/environment';
 
 @Injectable()
 export class MarvelService {
-  apikey = "bd815566a8b9a441231760d1b1347bb3";
-  ts = "1";
-  hash = "9c5f4965a592f3a4a3cca6d6e94405de";
   constructor(private http: HttpClient) {
   }
 
   fetchCharacters(): Promise<any> {
-    let url = environment.marvel + '/v1/public/characters?ts=' + this.ts + '&apikey=' + this.apikey + '&hash=' + this.hash;
+    let url = environment.marvel + '/characters';
+    console.log(url)
     return this.http.get(url)
       .toPromise()
       .then(response => {

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  marvel: "https://gateway.marvel.com"
+  marvel: "http://localhost:3000/marvel"
 };
 
 /*

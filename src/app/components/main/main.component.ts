@@ -18,7 +18,10 @@ export class MainComponent implements OnInit{
   getCharacters(){
     Promise.resolve(this.marvelService.fetchCharacters().then(res => {
       console.log(res);
-      this.characters = res.data.results;
+      this.characters = res;
+      for(let character of this.characters){
+        character.flipped = false;
+      }
       console.log(this.characters);
     }).catch(err => {
       console.log(err);
