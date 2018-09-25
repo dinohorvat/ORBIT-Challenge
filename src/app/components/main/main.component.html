@@ -1,9 +1,12 @@
-
 <div class="sidebar">
   <div>Tries: {{tries}}</div>
   <div>Guesses: {{guesses}}</div>
-
-  <button (click)="getCharacters()">Restart</button>
+  <div>
+    <button (click)="getCharacters()">Restart</button>
+  </div>
+  <div>
+    <button (click)="showDialog()">Show Leaderboard</button>
+  </div>
 </div>
 <div class="main-content">
 <p-dialog [width]="400" appendTo="body" header="Leaderboard" [(visible)]="display">
@@ -13,24 +16,19 @@
         <th></th>
         <th>Name</th>
         <th>Tries</th>
-        <th>Time</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-member>
+    <ng-template pTemplate="body" let-member let-rowIndex="rowIndex">
       <tr>
-        <td>1</td>
+        <td>{{rowIndex +1}}</td>
         <td>{{member.name}}</td>
-        <td>{{member.tries}}</td>
-        <td>{{member.time}}</td>
+        <td>{{member.score}}</td>
       </tr>
     </ng-template>
   </p-table>
   <p-footer>
   </p-footer>
 </p-dialog>
-
-<button type="text" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Show">Show</button>
-
 <mat-grid-list cols="5" rowHeight="4:2">
       <mat-grid-tile *ngFor="let character of characters">
         <img *ngIf="character.flipped"

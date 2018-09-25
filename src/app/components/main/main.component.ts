@@ -15,16 +15,22 @@ export class MainComponent implements OnInit{
   time;
   characters = [];
   display = false;
-  members = [
-    {name: "Dino Horvat", tries:42, time: "10:00"},
-    {name: "Marko Horvat", tries:22, time: "14:00"},
-    {name: "Ds Tisuat", tries:12, time: "12:00"},
-  ];
+  members = [];
   flippedFirst;
   flippedSecond;
   constructor(private marvelService: MarvelService){}
   ngOnInit(){
     this.getCharacters();
+    this.getLeaderboard();
+  }
+
+  getLeaderboard(){
+    Promise.resolve(this.marvelService.fetchLeaderboard().then(res => {
+      console.log(res);
+      this.members = res;
+    }).then(err => {
+      console.log(err);
+    }))
   }
 
   askLeaderboards(){
@@ -37,13 +43,15 @@ export class MainComponent implements OnInit{
       showCancelButton: true,
       confirmButtonText: 'Submit',
       showLoaderOnConfirm: true,
-      preConfirm: (login) => {
-        return fetch(`//api.github.com/users/${login}`)
+      preConfirm: (name) => {
+        let data = {
+          name: name,
+          score: this.tries
+        };
+        return Promise.resolve(this.marvelService.addScore(data))
           .then(response => {
-            if (!response.ok) {
-              throw new Error(response.statusText)
-            }
-            return response.json()
+            console.log(response);
+            return response
           })
           .catch(error => {
             swal.showValidationMessage(
@@ -55,15 +63,13 @@ export class MainComponent implements OnInit{
     }).then((result) => {
       if (result.value) {
         swal({
-          title: `${result.value.login}'s avatar`,
-          imageUrl: result.value.avatar_url
+          title: `Successfully Sent!`
         })
       }
     })
   }
   showDialog(){
     this.display = true;
-    this.askLeaderboards()
   }
   getCharacters(){
     // Resetting to default
@@ -104,7 +110,7 @@ export class MainComponent implements OnInit{
           this.flippedSecond = null;
           this.guesses++;
           if(this.guesses == 12){
-            alert('you won');
+            this.askLeaderboards();
           }
         }
       }

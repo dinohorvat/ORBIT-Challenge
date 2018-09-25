@@ -7,12 +7,34 @@ export class MarvelService {
   constructor(private http: HttpClient) {
   }
 
+  addScore(data): Promise<any> {
+    let url = environment.marvel + '/leaderboard';
+    console.log(url)
+    return this.http.post(url,data)
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(this.handleError);
+  }
+
   fetchCharacters(): Promise<any> {
     let url = environment.marvel + '/characters';
     console.log(url)
     return this.http.get(url)
       .toPromise()
       .then(response => {
+        return response;
+      })
+      .catch(this.handleError);
+  }
+
+  fetchLeaderboard(): Promise<any> {
+    let url = environment.marvel + '/leaderboard';
+    return this.http.get(url)
+      .toPromise()
+      .then(response => {
+        console.log(response);
         return response;
       })
       .catch(this.handleError);
