@@ -1,7 +1,11 @@
 
-Tries: {{tries}}
-<br>
-Guesses: {{guesses}}
+<div class="sidebar">
+  <div>Tries: {{tries}}</div>
+  <div>Guesses: {{guesses}}</div>
+
+  <button (click)="getCharacters()">Restart</button>
+</div>
+<div class="main-content">
 <p-dialog [width]="400" appendTo="body" header="Leaderboard" [(visible)]="display">
   <p-table  [value]="members">
     <ng-template pTemplate="header">
@@ -22,7 +26,6 @@ Guesses: {{guesses}}
     </ng-template>
   </p-table>
   <p-footer>
-    //buttons
   </p-footer>
 </p-dialog>
 
@@ -36,3 +39,4 @@ Guesses: {{guesses}}
              (click)="flipImage(character)" src="../../../assets/qmark.jpg"/>
       </mat-grid-tile>
 </mat-grid-list>
+</div>

@@ -1,0 +1,26 @@
+
+.title{
+  font-family: "Bebas";
+  color: #FFFFFF;
+  text-align:center;
+  margin-top: 50px;
+}
+.start{
+  font-size: 7em;
+  cursor: pointer;
+}
+.leaderboards{
+  margin-top: 15px;
+  font-size: 4em;
+  cursor: pointer;
+}
+a{
+  color:white;
+  text-decoration: none;
+}
+
+.landing-card{
+  width: 30%;
+  margin-left:auto;
+  margin-right:auto;
+}

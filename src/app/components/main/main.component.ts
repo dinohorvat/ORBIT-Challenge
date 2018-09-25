@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MarvelService} from '../../services/marvel.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-main',
@@ -26,8 +27,43 @@ export class MainComponent implements OnInit{
     this.getCharacters();
   }
 
+  askLeaderboards(){
+    swal({
+      title: 'Submit to Leaderboards',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      showLoaderOnConfirm: true,
+      preConfirm: (login) => {
+        return fetch(`//api.github.com/users/${login}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(response.statusText)
+            }
+            return response.json()
+          })
+          .catch(error => {
+            swal.showValidationMessage(
+              `Request failed: ${error}`
+            )
+          })
+      },
+      allowOutsideClick: () => !swal.isLoading()
+    }).then((result) => {
+      if (result.value) {
+        swal({
+          title: `${result.value.login}'s avatar`,
+          imageUrl: result.value.avatar_url
+        })
+      }
+    })
+  }
   showDialog(){
     this.display = true;
+    this.askLeaderboards()
   }
   getCharacters(){
     // Resetting to default

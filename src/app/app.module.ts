@@ -12,11 +12,13 @@ import {HttpClientModule} from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import {DialogModule} from 'primeng/dialog';
 import {TableModule} from 'primeng/table';
+import {LandingComponent} from './components/landing/landing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
