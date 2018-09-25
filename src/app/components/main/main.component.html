@@ -1,0 +1,9 @@
+<mat-grid-list cols="5" rowHeight="2:1">
+  <span *ngFor="let row of characters">
+      <mat-grid-tile><img [src]="row.thumbnail.path + '/portrait_xlarge.jpg'"/></mat-grid-tile>
+      <mat-grid-tile>2</mat-grid-tile>
+      <mat-grid-tile>3</mat-grid-tile>
+      <mat-grid-tile>4</mat-grid-tile>
+      <mat-grid-tile>5</mat-grid-tile>
+  </span>
+</mat-grid-list>

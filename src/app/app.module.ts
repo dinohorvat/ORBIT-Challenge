@@ -6,6 +6,9 @@ import {rootRouterConfig} from './app.routing';
 import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MainComponent} from './components/main/main.component';
+import {MatGridListModule} from '@angular/material';
+import {MarvelService} from './services/marvel.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,9 +18,11 @@ import {MainComponent} from './components/main/main.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
+    MatGridListModule
   ],
-  providers: [],
+  providers: [MarvelService],
   bootstrap: [
     AppComponent
   ]
