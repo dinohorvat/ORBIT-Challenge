@@ -1,5 +1,38 @@
-<mat-grid-list cols="5" rowHeight="2:1">
+
+Tries: {{tries}}
+<br>
+Guesses: {{guesses}}
+<p-dialog [width]="400" appendTo="body" header="Leaderboard" [(visible)]="display">
+  <p-table  [value]="members">
+    <ng-template pTemplate="header">
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Tries</th>
+        <th>Time</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-member>
+      <tr>
+        <td>1</td>
+        <td>{{member.name}}</td>
+        <td>{{member.tries}}</td>
+        <td>{{member.time}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-footer>
+    //buttons
+  </p-footer>
+</p-dialog>
+
+<button type="text" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Show">Show</button>
+
+<mat-grid-list cols="5" rowHeight="4:2">
       <mat-grid-tile *ngFor="let character of characters">
-        <img [src]="character.thumbnail.path + '/portrait_xlarge.jpg'"/>
+        <img *ngIf="character.flipped"
+             (click)="flipImage(character)" [src]="character.thumbnail.path + '/portrait_xlarge.jpg'"/>
+        <img *ngIf="!character.flipped"
+             (click)="flipImage(character)" src="../../../assets/qmark.jpg"/>
       </mat-grid-tile>
 </mat-grid-list>
