@@ -6,36 +6,21 @@ import {rootRouterConfig} from './app.routing';
 import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MainComponent} from './components/main/main.component';
-import {MatGridListModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatMenuModule} from '@angular/material';
+import {MatGridListModule} from '@angular/material';
 import {MarvelService} from './services/marvel.service';
 import {HttpClientModule} from '@angular/common/http';
-import { LayoutModule } from '@angular/cdk/layout';
-import {DialogModule} from 'primeng/dialog';
-import {TableModule} from 'primeng/table';
-import {LandingComponent} from './components/landing/landing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
-    LandingComponent
+    MainComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
-    MatGridListModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatCardModule,
-    MatMenuModule,
-    DialogModule,
-    TableModule
+    MatGridListModule
   ],
   providers: [MarvelService],
   bootstrap: [

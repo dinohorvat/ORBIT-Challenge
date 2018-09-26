@@ -1,29 +1,29 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-import {LandingComponent} from './components/landing/landing.component';
-import {MainComponent} from './components/main/main.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {HttpClientModule} from '@angular/common/http';
 import {
   MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatListModule, MatMenuModule, MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
-import {rootRouterConfig} from './app.routing';
+import {rootRouterConfig} from '../../app.routing';
 import {RouterModule} from '@angular/router';
 import {DialogModule} from 'primeng/dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
-import {MarvelService} from './services/marvel.service';
 import {LayoutModule} from '@angular/cdk/layout';
+import {MarvelService} from '../../services/marvel.service';
 import {APP_BASE_HREF} from '@angular/common';
-describe('AppComponent', () => {
+import {LandingComponent} from '../landing/landing.component';
+import {MainComponent} from '../main/main.component';
+
+
+describe('LandingComponent', () => {
+  let component: LandingComponent;
+  let fixture: ComponentFixture<LandingComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
-        LandingComponent,
-        MainComponent
-      ],
+      declarations: [ MainComponent, LandingComponent ],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -42,17 +42,17 @@ describe('AppComponent', () => {
         TableModule
       ],
       providers: [MarvelService,{provide: APP_BASE_HREF, useValue: '/'}]
-    }).compileComponents();
+    })
+      .compileComponents();
   }));
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'MarvelGUI'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('MarvelGUI');
-  }));
-;
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LandingComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
